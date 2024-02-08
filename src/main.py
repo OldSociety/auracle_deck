@@ -1,5 +1,6 @@
 from card import Card
 from coin import Coin
+from deck import Deck
 
 
 # Cards
@@ -40,6 +41,20 @@ wine_card = Card("19","The Wine", {"General": "Celebration, indulgence, or the i
 lion_card = Card("20","The Lion", {"General": "Strength, courage, and leadership, but also the danger of unchecked power. It speaks to the nobility of spirit and the risks of sovereignty."}, "Zyry")
 roses_card = Card("21","The Roses", {"General": "Beauty, the flowering of love or success, but with thorns that remind of the cost of desire."}, "Zyry")
 
+# Initialize list of cards
+cards_list = [
+    sun_card, anchor_card, ship_card, mountains_card,
+    forest_card, clover_card, shephard_card,
+    bonfire_card, rapier_card, storm_card,
+    weeds_card, mirror_card, mouse_card,
+    wheat_card, eye_card, snake_card,
+    dove_card, book_card, coffin_card,
+    wine_card, lion_card, roses_card
+]
+
+# Initialize the Deck instance with the list of cards
+deck = Deck(cards_list)
+
 # Coins
 larimar_coin = Coin("Larimar", "Green", 
                     heads_meaning="Wisdom, Depth, Intuition", 
@@ -60,6 +75,20 @@ zyry_coin = Coin("Zyry", "Gold",
                     heads_meaning="Wealth, Success, Achievement", 
                     tails_meaning="")
 
-sun_card.display_info()
-result = oth_orleth_coin.flip()
-print(f"The Oth-Orleth coin landed on {result}. Meaning: {oth_orleth_coin.meanings[result]}")
+def main():
+    # Prompt for user's question
+    input("What is your question for the Auracle Deck? (press enter to continue) ")
+    
+    # Shuffle the deck
+    deck.shuffle()
+
+    # Draw five cards
+    drawn_cards = deck.draw(5)
+
+    # Display the results
+    positions = ["The Present or General Theme", "Past Influences", "The Future", "The Reason Behind the Question", "The Potential Within the Situation"]
+    for position, card in zip(positions, drawn_cards):
+        print(f"{position}: {card.name} - {card.meanings['General']}")
+
+if __name__ == "__main__":
+    main()
